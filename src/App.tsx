@@ -1,7 +1,7 @@
-import React from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Courses from './components/Courses';
+import Competitions from './components/Competitions';
 import Projects from './components/Projects';
 import Team from './components/Team';
 import Footer from './components/Footer';
@@ -23,10 +23,12 @@ function App() {
       <div className="relative z-10">
         <Header />
         <Hero />
-        <Courses />
         <Projects />
+        <Courses />
+        <Competitions />
         <Team />
         <Footer />
+        
       </div>
     </div>
   );

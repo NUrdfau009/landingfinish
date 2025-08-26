@@ -1,46 +1,64 @@
-import React from 'react';
-import { Github, Linkedin, Mail, Award, Code, Cpu } from 'lucide-react';
+import { Github, Linkedin, Mail, Award, Code, Cpu, type LucideIcon } from 'lucide-react';
+
+type TeamMember = {
+  id: number;
+  name: string;
+  position: string;
+  specialization: string;
+  image: string;
+  description: string;
+  skills: string[];
+  achievements: string;
+};
+
+const teamMembers: TeamMember[] = [
+  {
+    id: 1,
+    name: 'Омар Нұрбек',
+    position: 'Техникалық директор',
+    specialization: 'Робототехника және AI',
+    image: 'src/components/img/nurbek.png',
+    description:
+      'Робототехника саласында 15 жылдық тәжірибесі бар маман. KAzGU уриверситеті түлегіч.',
+    skills: ['Python', 'ROS', 'TensorFlow', 'Arduino'],
+    achievements: '50+ жоба, 15+ сертификат',
+  },
+  {
+    id: 2,
+    name: 'Қайырбек Нұрдәулет',
+    position: 'AI мамандығы жетекшісі',
+    specialization: 'Машиналық оқыту және Computer Vision',
+    image: 'src/components/img/nurik.jpg',
+    description:
+      'Жасанды интеллект саласындағы зерттеуші. ХДУ университеті 4 - курс студенті  .',
+    skills: ['Python', 'Deep Learning', 'Neural Networks'],
+    achievements: '30+ ғылыми мақала, 10+ патент',
+  },
+  {
+    id: 3,
+    name: 'Мәжіт Сәуірбай',
+    position: 'Дрон технологиялары маманы',
+    specialization: 'Автономды жүйелер және IoT',
+    image: 'src/components/img/sayir.jpg',
+    description:
+      'Дрон технологиялары мен IoT жүйелері бойынша сарапшы. 3 жылдық  тәжірибе.',
+    skills: ['C++', 'ArduPilot', 'IoT', 'Embedded Systems'],
+    achievements: '25+ дрон жобасы, 5+ стартап',
+  },
+];
+
+const getSpecializationIcon = (specialization: string): LucideIcon => {
+  const s = specialization.toLowerCase();
+  if (s.includes('ai') || s.includes('machine') || s.includes('машиналық') || s.includes('vision') || s.includes('интеллект')) {
+    return Code;
+  }
+  if (s.includes('дрон') || s.includes('drone') || s.includes('iot') || s.includes('автономды')) {
+    return Cpu;
+  }
+  return Award;
+};
 
 const Team = () => {
-  const teamMembers = [
-    {
-      id: 1,
-      name: 'Омар Нұрбек',
-      position: 'Техникалық директор',
-      specialization: 'Робототехника және AI',
-      image: 'https://drive.google.com/file/d/1iG3nyzesMR85mOtNyl3xYjSUUJGjhRra/view?usp=sharing',
-      description: 'Робототехника саласында 8 жылдық тәжірибесі бар маман. MIT-тен магистр дәрежесі.',
-      skills: ['Python', 'ROS', 'TensorFlow', 'Arduino'],
-      achievements: '50+ жоба, 15+ сертификат'
-    },
-    {
-      id: 2,
-      name: 'Қайырбек Нұрдәулет',
-      position: 'AI мамандығы жетекшісі',
-      specialization: 'Машиналық оқыту және Computer Vision',
-      image: 'https://drive.google.com/file/d/18gCb9wm4kPsLrMZ2nyhpqODdIniNUCD1/view?usp=sharing',
-      description: 'Жасанды интеллект саласындағы зерттеуші. Stanford университетінен PhD дәрежесі.',
-      skills: ['PyTorch', 'OpenCV', 'Deep Learning', 'Neural Networks'],
-      achievements: '30+ ғылыми мақала, 10+ патент'
-    },
-    {
-      id: 3,
-      name: 'Мәжіт Сәуірбай',
-      position: 'Дрон технологиялары маманы',
-      specialization: 'Автономды жүйелер және IoT',
-      image: 'https://drive.google.com/file/d/1ck_H4moX3ZCL1gzo6LesnTcYFbQGoJCU/view?usp=sharing',
-      description: 'Дрон технологиялары мен IoT жүйелері бойынша сарапшы. 6 жылдық өндірістік тәжірибе.',
-      skills: ['C++', 'ArduPilot', 'IoT', 'Embedded Systems'],
-      achievements: '25+ дрон жобасы, 5+ стартап'
-    }
-  ];
-
-  const getSpecializationIcon = (specialization) => {
-    if (specialization.includes('AI') || specialization.includes('Machine')) return Code;
-    if (specialization.includes('Дрон') || specialization.includes('IoT')) return Cpu;
-    return Award;
-  };
-
   return (
     <section id="team" className="py-20 relative">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -60,17 +78,17 @@ const Team = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {teamMembers.map((member, index) => {
             const SpecIcon = getSpecializationIcon(member.specialization);
-            
+
             return (
               <div
                 key={member.id}
                 className="group relative bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm rounded-2xl border border-purple-500/20 p-6 hover:border-purple-400/50 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20"
-                style={{animationDelay: `${index * 0.2}s`}}
+                style={{ animationDelay: `${index * 0.2}s` }}
               >
-                {/* Member Photo */}
+                {/* Member Photo (gradient ring) */}
                 <div className="relative mb-6">
-                  <div className="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-gradient-to-r from-purple-400 to-pink-400 p-1">
-                    <div className="w-full h-full rounded-full overflow-hidden">
+                  <div className="mx-auto w-32 h-32 rounded-full p-[2px] bg-gradient-to-r from-purple-400 to-pink-400">
+                    <div className="w-full h-full rounded-full overflow-hidden bg-black">
                       <img
                         src={member.image}
                         alt={member.name}
@@ -78,9 +96,9 @@ const Team = () => {
                       />
                     </div>
                   </div>
-                  
+
                   {/* Specialization Icon */}
-                  <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 p-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full border-2 border-black">
+                  <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 transform p-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full border-2 border-black">
                     <SpecIcon className="h-4 w-4 text-white" />
                   </div>
                 </div>
@@ -118,7 +136,7 @@ const Team = () => {
 
                 {/* Achievements */}
                 <div className="mb-6">
-                  <div className="flex items-center text-sm text-gray-400">
+                  <div className="flex items-center justify-center text-sm text-gray-400">
                     <Award className="h-4 w-4 mr-2 text-yellow-400" />
                     <span>{member.achievements}</span>
                   </div>
@@ -127,12 +145,14 @@ const Team = () => {
                 {/* Social Links */}
                 <div className="flex justify-center space-x-3">
                   {[
-                    { icon: Github, color: 'hover:text-gray-300' },
-                    { icon: Linkedin, color: 'hover:text-blue-400' },
-                    { icon: Mail, color: 'hover:text-green-400' }
+                    { icon: Github, color: 'hover:text-gray-300', label: 'GitHub' },
+                    { icon: Linkedin, color: 'hover:text-blue-400', label: 'LinkedIn' },
+                    { icon: Mail, color: 'hover:text-green-400', label: 'Email' },
                   ].map((social, idx) => (
                     <button
                       key={idx}
+                      type="button"
+                      aria-label={social.label}
                       className={`p-2 bg-gray-800/50 border border-gray-600/50 rounded-lg text-gray-400 ${social.color} transition-all duration-300 hover:scale-110 hover:bg-gray-700/50`}
                     >
                       <social.icon className="h-4 w-4" />

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Menu, X, Zap } from 'lucide-react';
 
 const Header = () => {
@@ -35,7 +35,7 @@ const Header = () => {
               <div className="absolute inset-0 bg-blue-400 blur-sm opacity-50 group-hover:opacity-75 transition-opacity duration-300"></div>
             </div>
             <span className="text-xl lg:text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent font-['Orbitron']">
-              RoboTech
+              OQUlab
             </span>
           </div>
 

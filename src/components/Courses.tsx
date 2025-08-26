@@ -1,7 +1,8 @@
-import React from 'react';
-import { BookOpen, Users, Clock, Award } from 'lucide-react';
+import { BookOpen, Users, Clock } from 'lucide-react';
 
 const Courses = () => {
+  const whatsappNumber = '77715804134'; // 📱 Нөмір WhatsApp-қа
+
   const courses = [
     {
       id: 1,
@@ -15,13 +16,13 @@ const Courses = () => {
     },
     {
       id: 2,
-      title: 'Жасанды интеллект',
-      description: 'Python және машиналық оқытуды пайдаланып, AI қосымшалар жасау',
-      duration: '12 апта',
-      students: '200+',
+      title: 'Lego spike Prime',
+      description: 'lego spike prime роботтарын құрастыру және программалау жарыстарға дайындау',
+      duration: '2 апта',
+      students: '20+',
       level: 'Орташа',
       price: '₸75,000',
-      features: ['Python ML', 'Neural Networks', 'Computer Vision', 'NLP негіздері']
+      features: ['Робот құрастыру', 'Программалау негіздері', 'Жарыстарға дайындық', 'Командалық жұмыс']
     },
     {
       id: 3,
@@ -34,6 +35,11 @@ const Courses = () => {
       features: ['Дрон құрастыру', 'Автопилот', 'FPV жүйесі', 'Навигация']
     }
   ];
+
+  const getWhatsappLink = (courseTitle: string) => {
+    const text = `Мен "${courseTitle}" курсына жазылғым келеді`;
+    return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
+  };
 
   return (
     <section id="courses" className="py-20 relative">
@@ -56,7 +62,7 @@ const Courses = () => {
             <div
               key={course.id}
               className="group relative bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm rounded-2xl border border-blue-500/20 p-6 hover:border-blue-400/50 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/20"
-              style={{animationDelay: `${index * 0.2}s`}}
+              style={{ animationDelay: `${index * 0.2}s` }}
             >
               {/* Course Header */}
               <div className="mb-6">
@@ -104,23 +110,20 @@ const Courses = () => {
                 </ul>
               </div>
 
-              {/* CTA Button */}
-              <button className="w-full py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg hover:from-blue-500 hover:to-purple-500 transition-all duration-300 transform group-hover:scale-105">
+              {/* CTA Button → WhatsApp */}
+              <a
+                href={getWhatsappLink(course.title)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block w-full text-center py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg hover:from-blue-500 hover:to-purple-500 transition-all duration-300 transform group-hover:scale-105"
+              >
                 Курсқа жазылу
-              </button>
+              </a>
 
               {/* Hover Glow Effect */}
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-purple-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
             </div>
           ))}
-        </div>
-
-        {/* Bottom CTA */}
-        <div className="text-center mt-12">
-          <button className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-green-500 to-blue-500 text-white font-semibold rounded-lg hover:from-green-400 hover:to-blue-400 transition-all duration-300 transform hover:scale-105">
-            <Award className="h-5 w-5 mr-2" />
-            Барлық курстарды қарау
-          </button>
         </div>
       </div>
     </section>

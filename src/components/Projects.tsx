@@ -1,23 +1,26 @@
-import React, { useState } from 'react';
-import { ExternalLink, Github, Play, Zap } from 'lucide-react';
+import { useState } from 'react';
+
+
+type Status = 'Аяқталды' | 'Даму үстінде' | 'Жаңа' | 'Басқа';
+
+interface Project {
+  id: number;
+  title: string;
+  description: string;
+  category: string;
+  image: string;
+  technologies: string[];
+  status: Status;
+}
 
 const Projects = () => {
-  const [activeProject, setActiveProject] = useState(null);
+  const [activeProject, setActiveProject] = useState<number | null>(null);
 
-  const projects = [
-    {
-      id: 1,
-      title: 'Автономды қалалық робот',
-      description: 'LIDAR және AI көру жүйесін қолданатын навигациялық робот',
-      category: 'Робототехника',
-      image: 'https://images.pexels.com/photos/2085831/pexels-photo-2085831.jpeg?auto=compress&cs=tinysrgb&w=600',
-      technologies: ['ROS', 'Python', 'OpenCV', 'TensorFlow'],
-      status: 'Аяқталды'
-    },
+  const projects: Project[] = [
     {
       id: 2,
-      title: 'Дрон рояін басқару жүйесі',
-      description: 'Бірнеше дронды синхронды басқаруға арналған интеллектуалды жүйе',
+      title: 'Дрон ролін басқару жүйесі',
+      description: 'Дрондардың тұрақтылығы мен маневрлілігін арттыруға арналған басқару алгоритмі',
       category: 'Дрон технологиясы',
       image: 'https://images.pexels.com/photos/442587/pexels-photo-442587.jpeg?auto=compress&cs=tinysrgb&w=600',
       technologies: ['C++', 'ArduPilot', 'MAVLink', 'QGroundControl'],
@@ -25,48 +28,52 @@ const Projects = () => {
     },
     {
       id: 3,
-      title: 'Медициналық диагностика AI',
-      description: 'Медициналық кескіндерді талдауға арналған нейрондық желі',
+      title: 'Бизнеске арналған автаматтандырылған чатботтар',
+      description: 'Бизнес процестерін оңтайландыруға арналған AI негізіндегі чатботтар',
       category: 'Жасанды интеллект',
-      image: 'https://images.pexels.com/photos/355952/pexels-photo-355952.jpeg?auto=compress&cs=tinysrgb&w=600',
+      image: 'https://www.marketresearchintellect.com/images/blogs/the-rise-of-ai-chatbots-enhancing-user-experience-across-digital-platforms.webp',
       technologies: ['PyTorch', 'FastAPI', 'Docker', 'MongoDB'],
       status: 'Аяқталды'
     },
     {
-      id: 4,
-      title: 'Ақылды үй автоматикасы',
-      description: 'IoT сенсорлар мен машиналық оқытуды біріктірген үй жүйесі',
-      category: 'IoT',
-      image: 'https://images.pexels.com/photos/1571463/pexels-photo-1571463.jpeg?auto=compress&cs=tinysrgb&w=600',
-      technologies: ['Arduino', 'Node.js', 'MQTT', 'React'],
-      status: 'Жаңа'
-    },
-    {
       id: 5,
-      title: 'Роботты көшу жүйесі',
-      description: 'Бостон Dynamics-тің мысалы бойынша жасалған 4 аяқты робот',
+      title: 'Робот машинасы',
+      description: 'Автономды навигация және кедергілерден аулақ болу мүмкіндігі бар робот көлігі',
       category: 'Робототехника',
-      image: 'https://images.pexels.com/photos/8566473/pexels-photo-8566473.jpeg?auto=compress&cs=tinysrgb&w=600',
-      technologies: ['ROS2', 'Gazebo', 'Solidworks', 'C++'],
+      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRF_NV5A_FBMBE4n2onJKMi-T5S8Gextps3n1EBmmB1t9XOGi1znPgiJAUQZIz7qkj_KHE&usqp=CAU?auto=compress&cs=tinysrgb&w=600',
+      technologies: ['Arduino', 'C++'],
       status: 'Даму үстінде'
     },
     {
-      id: 6,
-      title: 'Блокчейн дрон желісі',
-      description: 'Дрондар арасында қауіпсіз деректер алмасуға арналған блокчейн',
-      category: 'Блокчейн',
-      image: 'https://images.pexels.com/photos/8566574/pexels-photo-8566574.jpeg?auto=compress&cs=tinysrgb&w=600',
-      technologies: ['Solidity', 'Web3.js', 'IPFS', 'Ethereum'],
-      status: 'Жаңа'
+      id: 5,
+      title: 'Мұғалімдерге арналған робототехника инструкторы',
+      description: 'Мұғалімдерге робототехника инструксияларын жасауды үйретуге арналған құрал',
+      category: 'Робототехника',
+      image: 'https://frankfurt2.apollo.olxcdn.com/v1/files/80qklgwm5jf01-KZ/image;s=2400x3000',
+      technologies: ['LEGO', 'JAVA SCRIPT'],
+      status: 'Даму үстінде'
+    },
+    {
+      id: 5,
+      title: 'Дцп ауруына шалдыққан балаларға арналған жаттығу құрылғысы',
+      description: 'Дцп дертті балаларға арналған жаттығу құрылғысы',
+      category: 'Медициналық құрылғылар',
+      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuHJWPVyZvWKwaBFjdRZ3Vz96zZaKl1K80Jw&s',
+      technologies: ['C++', 'typescript', 'python'],
+      status: 'Даму үстінде'
     }
   ];
 
-  const getStatusColor = (status) => {
+  const getStatusColor = (status: Project['status']): string => {
     switch (status) {
-      case 'Аяқталды': return 'text-green-400 bg-green-400/20 border-green-400/30';
-      case 'Даму үстінде': return 'text-blue-400 bg-blue-400/20 border-blue-400/30';
-      case 'Жаңа': return 'text-purple-400 bg-purple-400/20 border-purple-400/30';
-      default: return 'text-gray-400 bg-gray-400/20 border-gray-400/30';
+      case 'Аяқталды':
+        return 'text-green-400 bg-green-400/20 border-green-400/30';
+      case 'Даму үстінде':
+        return 'text-blue-400 bg-blue-400/20 border-blue-400/30';
+      case 'Жаңа':
+        return 'text-purple-400 bg-purple-400/20 border-purple-400/30';
+      default:
+        return 'text-gray-400 bg-gray-400/20 border-gray-400/30';
     }
   };
 
@@ -93,7 +100,7 @@ const Projects = () => {
               className="group relative bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-gray-700/50 hover:border-blue-400/50 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/20"
               onMouseEnter={() => setActiveProject(project.id)}
               onMouseLeave={() => setActiveProject(null)}
-              style={{animationDelay: `${index * 0.1}s`}}
+              style={{ animationDelay: `${index * 0.1}s` }}
             >
               {/* Project Image */}
               <div className="relative h-48 overflow-hidden">
@@ -103,24 +110,15 @@ const Projects = () => {
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-                
-                {/* Overlay Icons */}
-                <div className={`absolute inset-0 flex items-center justify-center space-x-4 transition-opacity duration-300 ${
-                  activeProject === project.id ? 'opacity-100' : 'opacity-0'
-                }`}>
-                  <button className="p-3 bg-blue-500/80 rounded-full hover:bg-blue-500 transition-colors duration-300">
-                    <Play className="h-5 w-5 text-white" />
-                  </button>
-                  <button className="p-3 bg-green-500/80 rounded-full hover:bg-green-500 transition-colors duration-300">
-                    <Github className="h-5 w-5 text-white" />
-                  </button>
-                  <button className="p-3 bg-purple-500/80 rounded-full hover:bg-purple-500 transition-colors duration-300">
-                    <ExternalLink className="h-5 w-5 text-white" />
-                  </button>
-                </div>
+
+              
 
                 {/* Status Badge */}
-                <div className={`absolute top-4 right-4 px-3 py-1 text-xs font-semibold rounded-full border ${getStatusColor(project.status)}`}>
+                <div
+                  className={`absolute top-4 right-4 px-3 py-1 text-xs font-semibold rounded-full border ${getStatusColor(
+                    project.status
+                  )}`}
+                >
                   {project.status}
                 </div>
               </div>
@@ -132,11 +130,11 @@ const Projects = () => {
                     {project.category}
                   </span>
                 </div>
-                
+
                 <h3 className="text-xl font-bold text-white mb-3 group-hover:text-blue-300 transition-colors duration-300">
                   {project.title}
                 </h3>
-                
+
                 <p className="text-gray-400 text-sm leading-relaxed mb-4">
                   {project.description}
                 </p>
@@ -152,26 +150,12 @@ const Projects = () => {
                     </span>
                   ))}
                 </div>
-
-                {/* Action Button */}
-                <button className="w-full py-2 bg-gradient-to-r from-blue-600/20 to-purple-600/20 border border-blue-500/30 text-blue-300 font-semibold rounded-lg hover:from-blue-600/40 hover:to-purple-600/40 hover:border-blue-400/50 transition-all duration-300 flex items-center justify-center space-x-2">
-                  <Zap className="h-4 w-4" />
-                  <span>Толығырақ</span>
-                </button>
               </div>
 
               {/* Hover Glow Effect */}
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
             </div>
           ))}
-        </div>
-
-        {/* Bottom CTA */}
-        <div className="text-center mt-12">
-          <button className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold rounded-lg hover:from-purple-400 hover:to-pink-400 transition-all duration-300 transform hover:scale-105">
-            <Github className="h-5 w-5 mr-2" />
-            GitHub-та көру
-          </button>
         </div>
       </div>
     </section>
