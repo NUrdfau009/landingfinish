@@ -19,7 +19,7 @@ const teamMembers: TeamMember[] = [
     specialization: 'Робототехника және AI',
     image: 'https://raw.githubusercontent.com/NUrdfau009/foto/main/nurbek.png',
     description:
-      'Робототехника саласында 15 жылдық тәжірибесі бар маман. KAzGU уриверситеті түлегіч.',
+      'Робототехника саласында 15 жылдық тәжірибесі бар маман. KAzGU уриверситеті түлегі.',
     skills: ['Python', 'ROS', 'TensorFlow', 'Arduino'],
     achievements: '50+ жоба, 15+ сертификат',
   },
