@@ -17,7 +17,7 @@ const teamMembers: TeamMember[] = [
     name: 'Омар Нұрбек',
     position: 'Техникалық директор',
     specialization: 'Робототехника және AI',
-    image: 'src/components/img/nurbek.png',
+    image: 'https://raw.githubusercontent.com/NUrdfau009/foto/main/nurbek.png',
     description:
       'Робототехника саласында 15 жылдық тәжірибесі бар маман. KAzGU уриверситеті түлегіч.',
     skills: ['Python', 'ROS', 'TensorFlow', 'Arduino'],
@@ -28,7 +28,7 @@ const teamMembers: TeamMember[] = [
     name: 'Қайырбек Нұрдәулет',
     position: 'AI мамандығы жетекшісі',
     specialization: 'Машиналық оқыту және Computer Vision',
-    image: 'src/components/img/nurik.jpg',
+    image: 'https://raw.githubusercontent.com/NUrdfau009/foto/main/nurik.jpg',
     description:
       'Жасанды интеллект саласындағы зерттеуші. ХДУ университеті 4 - курс студенті  .',
     skills: ['Python', 'Deep Learning', 'Neural Networks'],
@@ -39,7 +39,7 @@ const teamMembers: TeamMember[] = [
     name: 'Мәжіт Сәуірбай',
     position: 'Дрон технологиялары маманы',
     specialization: 'Автономды жүйелер және IoT',
-    image: 'src/components/img/sayir.jpg',
+    image: 'https://raw.githubusercontent.com/NUrdfau009/foto/main/sayir.jpg',
     description:
       'Дрон технологиялары мен IoT жүйелері бойынша сарапшы. 3 жылдық  тәжірибе.',
     skills: ['C++', 'ArduPilot', 'IoT', 'Embedded Systems'],

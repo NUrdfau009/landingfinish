@@ -24,8 +24,8 @@ const slidesData: Slide[] = [
     place: "1 орын",
     author: "Қайырбек Нұрдаулет",
     desc: "Жасанды интеллект саласындағы инновациялық жобалар конкурсында медициналық AI жүйесімен жеңіске жеттік.",
-    image: "src/components/img/1.jpg",
-    thumb: "src/components/img/1.jpg",
+    image: "https://raw.githubusercontent.com/NUrdfau009/foto/main/1.jpg",
+    thumb: "https://raw.githubusercontent.com/NUrdfau009/foto/main/1.jpg",
     link: "#"
   },
   {
@@ -36,8 +36,8 @@ const slidesData: Slide[] = [
     place: "2 орын",
     author: "Омар Нұрбек",
     desc: "Автономды навигация және манипуляция тапсырмалары бойынша роботымыз жоғары балл жинады.",
-    image: "src/components/img/3.jpg",
-    thumb: "src/components/img/3.jpg",
+    image: "https://raw.githubusercontent.com/NUrdfau009/foto/main/3.jpg",
+    thumb: "https://raw.githubusercontent.com/NUrdfau009/foto/main/3.jpg",
     link: "#"
   },
   {
@@ -48,8 +48,8 @@ const slidesData: Slide[] = [
     place: "Финалист",
     author: "Мәжіт Сәуірбай",
     desc: "FPV трассасында жоғары жылдамдық пен дәлдік көрсетіп, финалға өттік.",
-    image: "src/components/img/4.jpg?auto=compress&cs=tinysrgb&w=1600",
-    thumb: "src/components/img/4.jpg?auto=compress&cs=tinysrgb&w=200",
+    image: "https://raw.githubusercontent.com/NUrdfau009/foto/main/4.jpg?auto=compress&cs=tinysrgb&w=1600",
+    thumb: "https://raw.githubusercontent.com/NUrdfau009/foto/main/4.jpg?auto=compress&cs=tinysrgb&w=200",
     link: "#"
   },
   {
@@ -60,8 +60,8 @@ const slidesData: Slide[] = [
     place: "3 орын",
     author: "Команда OQU",
     desc: "Lego Spike Prime негізіндегі тапсырмаларда тұрақты нәтиже көрсетілді.",
-    image: "src/components/img/005.jpg",
-    thumb: "src/components/img/005.jpg?auto=compress&cs=tinysrgb&w=200",
+    image: "https://raw.githubusercontent.com/NUrdfau009/foto/main/005.jpg",
+    thumb: "https://raw.githubusercontent.com/NUrdfau009/foto/main/005.jpg?auto=compress&cs=tinysrgb&w=200",
     link: "#"
   }
 ];
