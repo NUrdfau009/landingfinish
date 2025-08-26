@@ -158,12 +158,7 @@ export default function Competitions() {
 
               {/* CTA */}
               <div className="mt-6">
-                <a
-                  href={current.link ?? "#"}
-                  className="inline-flex items-center px-6 py-3 rounded-lg bg-amber-500 hover:bg-amber-400 text-black font-semibold transition-colors"
-                >
-                  Толығырақ
-                </a>
+                
               </div>
             </div>
 

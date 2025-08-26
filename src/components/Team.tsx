@@ -1,4 +1,4 @@
-import { Github, Linkedin, Mail, Award, Code, Cpu, type LucideIcon } from 'lucide-react';
+import {Award, Code, Cpu, type LucideIcon } from 'lucide-react';
 
 type TeamMember = {
   id: number;
@@ -39,7 +39,7 @@ const teamMembers: TeamMember[] = [
     name: 'Мәжіт Сәуірбай',
     position: 'Дрон технологиялары маманы',
     specialization: 'Автономды жүйелер және IoT',
-    image: 'https://raw.githubusercontent.com/NUrdfau009/foto/main/sayir.jpg',
+    image: 'https://raw.githubusercontent.com/NUrdfau009/foto/main/sauir.jpg',
     description:
       'Дрон технологиялары мен IoT жүйелері бойынша сарапшы. 3 жылдық  тәжірибе.',
     skills: ['C++', 'ArduPilot', 'IoT', 'Embedded Systems'],
@@ -142,23 +142,7 @@ const Team = () => {
                   </div>
                 </div>
 
-                {/* Social Links */}
-                <div className="flex justify-center space-x-3">
-                  {[
-                    { icon: Github, color: 'hover:text-gray-300', label: 'GitHub' },
-                    { icon: Linkedin, color: 'hover:text-blue-400', label: 'LinkedIn' },
-                    { icon: Mail, color: 'hover:text-green-400', label: 'Email' },
-                  ].map((social, idx) => (
-                    <button
-                      key={idx}
-                      type="button"
-                      aria-label={social.label}
-                      className={`p-2 bg-gray-800/50 border border-gray-600/50 rounded-lg text-gray-400 ${social.color} transition-all duration-300 hover:scale-110 hover:bg-gray-700/50`}
-                    >
-                      <social.icon className="h-4 w-4" />
-                    </button>
-                  ))}
-                </div>
+              
 
                 {/* Hover Glow Effect */}
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-500/5 to-pink-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>

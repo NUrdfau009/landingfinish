@@ -9,7 +9,6 @@ interface Project {
   description: string;
   category: string;
   image: string;
-  technologies: string[];
   status: Status;
 }
 
@@ -23,16 +22,14 @@ const Projects = () => {
       description: 'Дрондардың тұрақтылығы мен маневрлілігін арттыруға арналған басқару алгоритмі',
       category: 'Дрон технологиясы',
       image: 'https://images.pexels.com/photos/442587/pexels-photo-442587.jpeg?auto=compress&cs=tinysrgb&w=600',
-      technologies: ['C++', 'ArduPilot', 'MAVLink', 'QGroundControl'],
       status: 'Даму үстінде'
     },
     {
       id: 3,
-      title: 'Бизнеске арналған автаматтандырылған чатботтар',
-      description: 'Бизнес процестерін оңтайландыруға арналған AI негізіндегі чатботтар',
-      category: 'Жасанды интеллект',
-      image: 'https://www.marketresearchintellect.com/images/blogs/the-rise-of-ai-chatbots-enhancing-user-experience-across-digital-platforms.webp',
-      technologies: ['PyTorch', 'FastAPI', 'Docker', 'MongoDB'],
+      title: 'Telegram parsing бот жаңалықтар ',
+      description: 'Жаңалықтарды жинау және талдау үшін Telegram parsing бот',
+      category: ' Programming',
+      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSshgnMcPwCljawQSFc4r_0NCeNDH7uEdhv3Q&s',
       status: 'Аяқталды'
     },
     {
@@ -41,7 +38,6 @@ const Projects = () => {
       description: 'Автономды навигация және кедергілерден аулақ болу мүмкіндігі бар робот көлігі',
       category: 'Робототехника',
       image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRF_NV5A_FBMBE4n2onJKMi-T5S8Gextps3n1EBmmB1t9XOGi1znPgiJAUQZIz7qkj_KHE&usqp=CAU?auto=compress&cs=tinysrgb&w=600',
-      technologies: ['Arduino', 'C++'],
       status: 'Даму үстінде'
     },
     {
@@ -50,7 +46,6 @@ const Projects = () => {
       description: 'Мұғалімдерге робототехника инструксияларын жасауды үйретуге арналған құрал',
       category: 'Робототехника',
       image: 'https://frankfurt2.apollo.olxcdn.com/v1/files/80qklgwm5jf01-KZ/image;s=2400x3000',
-      technologies: ['LEGO', 'JAVA SCRIPT'],
       status: 'Даму үстінде'
     },
     {
@@ -59,8 +54,15 @@ const Projects = () => {
       description: 'Дцп дертті балаларға арналған жаттығу құрылғысы',
       category: 'Медициналық құрылғылар',
       image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuHJWPVyZvWKwaBFjdRZ3Vz96zZaKl1K80Jw&s',
-      technologies: ['C++', 'typescript', 'python'],
       status: 'Даму үстінде'
+    },
+    {
+      id: 3,
+      title: 'Бизнеске арналған автаматтандырылған чатботтар',
+      description: 'Бизнес процестерін оңтайландыруға арналған AI негізіндегі чатботтар',
+      category: 'Жасанды интеллект',
+      image: 'https://www.marketresearchintellect.com/images/blogs/the-rise-of-ai-chatbots-enhancing-user-experience-across-digital-platforms.webp',
+      status: 'Аяқталды'
     }
   ];
 
@@ -139,17 +141,6 @@ const Projects = () => {
                   {project.description}
                 </p>
 
-                {/* Technologies */}
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.technologies.map((tech, idx) => (
-                    <span
-                      key={idx}
-                      className="px-2 py-1 bg-gray-800/50 text-gray-300 text-xs rounded border border-gray-600/50"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
               </div>
 
               {/* Hover Glow Effect */}
