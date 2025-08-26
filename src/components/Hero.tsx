@@ -1,4 +1,99 @@
-import { ArrowRight, Cpu, Zap, BrainCircuit as Circuit } from 'lucide-react';
+import { useEffect, useRef, useState } from "react";
+import { ArrowRight, Cpu, Zap, BrainCircuit as Circuit, Volume2 } from "lucide-react";
+
+declare global {
+  interface Window {
+    YT: any;
+    onYouTubeIframeAPIReady: () => void;
+  }
+}
+
+const YouTubeHeroPlayer = ({ videoId }: { videoId: string }) => {
+  const playerRef = useRef<any>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const [ready, setReady] = useState(false);
+  const [unmuted, setUnmuted] = useState(false);
+
+  // load YouTube Iframe API once
+  useEffect(() => {
+    const hasScript = document.querySelector('script[src="https://www.youtube.com/iframe_api"]');
+    if (!hasScript) {
+      const tag = document.createElement("script");
+      tag.src = "https://www.youtube.com/iframe_api";
+      document.body.appendChild(tag);
+    }
+
+    const onAPIReady = () => {
+      if (!containerRef.current) return;
+      playerRef.current = new window.YT.Player(containerRef.current, {
+        videoId,
+        playerVars: {
+          // mute=1 allows autoplay on mobile; playsinline keeps it inside the page on iOS
+          autoplay: 1,
+          mute: 1,
+          controls: 0,
+          modestbranding: 1,
+          rel: 0,
+          loop: 1,
+          playlist: videoId,
+          playsinline: 1,
+        },
+        events: {
+          onReady: () => {
+            setReady(true);
+            // try to start silently (allowed)
+            playerRef.current?.playVideo?.();
+          },
+        },
+      });
+    };
+
+    if (window.YT && window.YT.Player) {
+      onAPIReady();
+    } else {
+      window.onYouTubeIframeAPIReady = onAPIReady;
+    }
+  }, [videoId]);
+
+  // user gesture to enable sound
+  const handleUnmute = () => {
+    try {
+      playerRef.current?.unMute?.();
+      playerRef.current?.setVolume?.(100);
+      playerRef.current?.playVideo?.();
+      setUnmuted(true);
+    } catch (e) {
+      // no-op
+    }
+  };
+
+  return (
+    <div className="relative pt-[56.25%] rounded-3xl overflow-hidden border-4 border-blue-400/50 shadow-xl bg-gradient-to-br from-blue-500/10 to-purple-500/10">
+      {/* The API will replace this div with an <iframe> */}
+      <div
+        ref={containerRef}
+        className="absolute top-0 left-0 w-full h-full"
+        // IMPORTANT: allow playsinline+autoplay
+        // When API injects iframe, it will include proper attributes
+      />
+      {/* Soft glow overlay */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-blue-500/10 to-transparent"></div>
+
+      {/* Unmute button overlay (shown until user taps) */}
+      {ready && !unmuted && (
+        <button
+          onClick={handleUnmute}
+          className="absolute bottom-4 right-4 z-10 px-4 py-2 rounded-xl bg-white/90 hover:bg-white text-black font-semibold backdrop-blur-sm shadow-lg transition"
+        >
+          <span className="flex items-center gap-2">
+            <Volume2 className="h-5 w-5" />
+            Дыбысты қосу
+          </span>
+        </button>
+      )}
+    </div>
+  );
+};
 
 const Hero = () => {
   return (
@@ -19,7 +114,7 @@ const Hero = () => {
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
         <div className="max-w-5xl mx-auto">
-          {/* Main Heading */}
+          {/* Heading */}
           <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black mb-8 font-['Orbitron'] leading-tight">
             <span className="block bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent glow-text">
               Болашақ
@@ -32,13 +127,12 @@ const Hero = () => {
             </span>
           </h1>
 
-          {/* Subtitle */}
           <p className="text-lg sm:text-xl lg:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed">
             Заманауи робототехника, жасанды интеллект және бағдарламалау саласында
             мамандар дайындау орталығы
           </p>
 
-          {/* CTA Buttons */}
+          {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
             <button className="group relative px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg font-semibold text-white hover:from-blue-500 hover:to-purple-500 transition-all duration-300 transform hover:scale-105 neon-border">
               <span className="flex items-center space-x-2">
@@ -48,28 +142,16 @@ const Hero = () => {
             </button>
 
             <a
-                href="tel:+77715804134"
-                className="group px-8 py-4 border-2 border-blue-400 text-blue-400 rounded-lg font-semibold hover:bg-blue-400 hover:text-black transition-all duration-300 transform hover:scale-105"
-              >
-                <span>Тегін консультация</span>
-              </a>
+              href="tel:+77715804134"
+              className="group px-8 py-4 border-2 border-blue-400 text-blue-400 rounded-lg font-semibold hover:bg-blue-400 hover:text-black transition-all duration-300 transform hover:scale-105"
+            >
+              <span>Тегін консультация</span>
+            </a>
           </div>
 
-          {/* YouTube Video (робот орнына) */}
+          {/* YouTube Player with tap-to-unmute */}
           <div className="relative mx-auto max-w-3xl lg:max-w-4xl">
-            {/* 16:9 контейнер (плагинсіз) */}
-            <div className="relative pt-[56.25%] rounded-3xl overflow-hidden border-4 border-blue-400/50 shadow-xl bg-gradient-to-br from-blue-500/10 to-purple-500/10 float-animation">
-              <iframe
-                // 👇 Осы жердегі VIDEO_ID-ті өз видеоңның ID-не ауыстыр
-                src="https://www.youtube.com/embed/gOXc3pEdsEA?autoplay=1&mute=1&loop=1&playlist=gOXc3pEdsEA"
-                title="YouTube video"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="absolute top-0 left-0 w-full h-full"
-              />
-              {/* Жеңіл жарқыл эффект */}
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-blue-500/10 to-transparent"></div>
-            </div>
+            <YouTubeHeroPlayer videoId="gOXc3pEdsEA" />
           </div>
         </div>
       </div>
