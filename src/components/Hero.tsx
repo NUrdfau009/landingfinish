@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from "react";
-import { ArrowRight, Cpu, Zap, BrainCircuit as Circuit, Volume2 } from "lucide-react";
+import React, { useEffect, useRef, useState } from "react";
+import { ArrowRight, Cpu, Zap, BrainCircuit as Circuit, Volume2, VolumeX } from 'lucide-react';
 
+// --- YouTube Hero Player with left-bottom toggle ---
 declare global {
   interface Window {
     YT: any;
@@ -12,10 +13,10 @@ const YouTubeHeroPlayer = ({ videoId }: { videoId: string }) => {
   const playerRef = useRef<any>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [ready, setReady] = useState(false);
-  const [unmuted, setUnmuted] = useState(false);
+  const [isMuted, setIsMuted] = useState(true); // бастау: mute (мобиль автоплей үшін)
 
-  // load YouTube Iframe API once
   useEffect(() => {
+    // Load YouTube Iframe API once
     const hasScript = document.querySelector('script[src="https://www.youtube.com/iframe_api"]');
     if (!hasScript) {
       const tag = document.createElement("script");
@@ -28,73 +29,76 @@ const YouTubeHeroPlayer = ({ videoId }: { videoId: string }) => {
       playerRef.current = new window.YT.Player(containerRef.current, {
         videoId,
         playerVars: {
-          // mute=1 allows autoplay on mobile; playsinline keeps it inside the page on iOS
           autoplay: 1,
-          mute: 1,
+          mute: 1,            // мобильде автоплей үшін
           controls: 0,
           modestbranding: 1,
           rel: 0,
           loop: 1,
-          playlist: videoId,
+          playlist: videoId,  // loop үшін керек
           playsinline: 1,
         },
         events: {
           onReady: () => {
             setReady(true);
-            // try to start silently (allowed)
             playerRef.current?.playVideo?.();
           },
         },
       });
     };
 
-    if (window.YT && window.YT.Player) {
+    if ((window as any).YT && (window as any).YT.Player) {
       onAPIReady();
     } else {
       window.onYouTubeIframeAPIReady = onAPIReady;
     }
   }, [videoId]);
 
-  // user gesture to enable sound
-  const handleUnmute = () => {
+  const toggleMute = () => {
+    if (!playerRef.current) return;
     try {
-      playerRef.current?.unMute?.();
-      playerRef.current?.setVolume?.(100);
-      playerRef.current?.playVideo?.();
-      setUnmuted(true);
-    } catch (e) {
+      if (isMuted) {
+        // дыбысты қосу (user gesture бар)
+        playerRef.current.unMute?.();
+        playerRef.current.setVolume?.(100);
+        playerRef.current.playVideo?.();
+        setIsMuted(false);
+      } else {
+        // дыбысты өшіру
+        playerRef.current.mute?.();
+        setIsMuted(true);
+      }
+    } catch {
       // no-op
     }
   };
 
   return (
     <div className="relative pt-[56.25%] rounded-3xl overflow-hidden border-4 border-blue-400/50 shadow-xl bg-gradient-to-br from-blue-500/10 to-purple-500/10">
-      {/* The API will replace this div with an <iframe> */}
-      <div
-        ref={containerRef}
-        className="absolute top-0 left-0 w-full h-full"
-        // IMPORTANT: allow playsinline+autoplay
-        // When API injects iframe, it will include proper attributes
-      />
-      {/* Soft glow overlay */}
+      {/* API осы div-ті iframe-ге ауыстырады */}
+      <div ref={containerRef} className="absolute top-0 left-0 w-full h-full" />
+
+      {/* Жеңіл жарқыл */}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-blue-500/10 to-transparent"></div>
 
-      {/* Unmute button overlay (shown until user taps) */}
-      {ready && !unmuted && (
+      {/* Сол жақ төменгі бұрыштағы дыбыс toggle батырма */}
+      {ready && (
         <button
-          onClick={handleUnmute}
-          className="absolute bottom-4 right-4 z-10 px-4 py-2 rounded-xl bg-white/90 hover:bg-white text-black font-semibold backdrop-blur-sm shadow-lg transition"
+          onClick={toggleMute}
+          className="absolute bottom-4 left-4 z-10 px-4 py-2 rounded-xl bg-white/90 hover:bg-white text-black font-semibold backdrop-blur-sm shadow-lg transition flex items-center gap-2"
+          aria-label={isMuted ? "Дыбысты қосу" : "Дыбысты өшіру"}
+          title={isMuted ? "Дыбысты қосу" : "Дыбысты өшіру"}
+          aria-pressed={!isMuted}
         >
-          <span className="flex items-center gap-2">
-            <Volume2 className="h-5 w-5" />
-            Дыбысты қосу
-          </span>
+          {isMuted ? <Volume2 className="h-5 w-5" /> : <VolumeX className="h-5 w-5" />}
+          <span>{isMuted ? "Дыбысты қосу" : "Дыбысты өшіру"}</span>
         </button>
       )}
     </div>
   );
 };
 
+// --- Full Hero section ---
 const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
@@ -114,7 +118,7 @@ const Hero = () => {
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
         <div className="max-w-5xl mx-auto">
-          {/* Heading */}
+          {/* Main Heading */}
           <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black mb-8 font-['Orbitron'] leading-tight">
             <span className="block bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent glow-text">
               Болашақ
@@ -127,12 +131,13 @@ const Hero = () => {
             </span>
           </h1>
 
+          {/* Subtitle */}
           <p className="text-lg sm:text-xl lg:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed">
             Заманауи робототехника, жасанды интеллект және бағдарламалау саласында
             мамандар дайындау орталығы
           </p>
 
-          {/* CTAs */}
+          {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
             <button className="group relative px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg font-semibold text-white hover:from-blue-500 hover:to-purple-500 transition-all duration-300 transform hover:scale-105 neon-border">
               <span className="flex items-center space-x-2">
@@ -149,7 +154,7 @@ const Hero = () => {
             </a>
           </div>
 
-          {/* YouTube Player with tap-to-unmute */}
+          {/* YouTube Player with left-bottom toggle */}
           <div className="relative mx-auto max-w-3xl lg:max-w-4xl">
             <YouTubeHeroPlayer videoId="gOXc3pEdsEA" />
           </div>
