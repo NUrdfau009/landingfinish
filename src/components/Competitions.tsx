@@ -18,12 +18,12 @@ type Slide = {
 const slidesData: Slide[] = [
   {
     id: 1,
-    title: "AI Innovation Contest 2024",
+    title: "Programming Contest",
     date: "10.07.2025",
     location: "Нұр-Сұлтан",
-    place: "1 орын",
+    place: "3 орын",
     author: "Қайырбек Нұрдаулет",
-    desc: "Жасанды интеллект саласындағы инновациялық жобалар конкурсында медициналық AI жүйесімен жеңіске жеттік.",
+    desc: "Конкурс по программированию Turan university-де 3 орын алдық.",
     image: "https://raw.githubusercontent.com/NUrdfau009/foto/main/1.jpg",
     thumb: "https://raw.githubusercontent.com/NUrdfau009/foto/main/1.jpg",
     link: "#"
@@ -54,14 +54,50 @@ const slidesData: Slide[] = [
   },
   {
     id: 4,
-    title: "Lego Robotics League",
-    date: "18.03.2024",
-    location: "Алматы",
+    title: "Республиканский конкурс Fibonacci International Robot Olympiad 2025",
+    date: "18.03.2025",
+    location: "Астана",
     place: "3 орын",
     author: "Команда OQU",
-    desc: "Lego Spike Prime негізіндегі тапсырмаларда тұрақты нәтиже көрсетілді.",
+    desc: "Lego Spike Prime line негізіндегі тапсырмаларда тұрақты нәтиже көрсетілді.",
     image: "https://raw.githubusercontent.com/NUrdfau009/foto/main/005.jpg",
     thumb: "https://raw.githubusercontent.com/NUrdfau009/foto/main/005.jpg?auto=compress&cs=tinysrgb&w=200",
+    link: "https://udn.edu.kz/ru/2025/04/08/%D0%A0%D0%B5%D1%81%D0%BF%D1%83%D0%B1%D0%BB%D0%B8%D0%BA%D0%B0%D0%BD%D1%81%D0%BA%D0%B8%D0%B9-%D0%BA%D0%BE%D0%BD%D0%BA%D1%83%D1%80%D1%81-fibonacci-international-robot-olympiad-2025/"
+  },
+  {
+    id: 5,
+    title: "Международный чемпионат FIRST LEGO League Asia Open Championship 2024",
+    date: "07.01.2024",
+    location: "Астана",
+    place: "1 орын",
+    author: "Команда ROBOPARK",
+    desc: "FIRST® LEGO® League Challenge категориясында Бас жүлде Әлемдік жарсқа жолдама алдық.",
+    image: "https://raw.githubusercontent.com/NUrdfau009/foto/main/8.jpg",
+    thumb: "https://raw.githubusercontent.com/NUrdfau009/foto/main/8.jpg",
+    link: "#"
+  },
+  {
+    id: 5,
+    title: "«TOM: Almaty»",
+    date: "06.05.2025",
+    location: "Алматы",
+    place: "1 орын",
+    author: "Команда OQU",
+    desc: "«TOM: Almaty» хакатонында біздің жоба үздік деп танылды.",
+    image: "https://satbayev.university/upload/base/2025/05/photo-5226487566281339990-y.jpg",
+    thumb: "https://satbayev.university/upload/base/2025/05/photo-5226487566281339990-y.jpg",
+    link: "#"
+  },
+  {
+    id: 5,
+    title: "VEX IQ Challenge",
+    date: "07.01.2024",
+    location: "Алматы",
+    place: "Семинар",
+    author: "Қайырбек Нұрдаулет",
+    desc: "VEX IQ Challenge семинарында қатысушыларға робототехника негіздері үйретілді.",
+    image: "https://raw.githubusercontent.com/NUrdfau009/foto/main/9.jpg",
+    thumb: "https://raw.githubusercontent.com/NUrdfau009/foto/main/9.jpg",
     link: "#"
   }
 ];

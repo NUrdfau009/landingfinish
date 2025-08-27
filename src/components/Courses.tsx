@@ -5,24 +5,24 @@ const Courses = () => {
 
   const courses = [
     {
-      id: 1,
-      title: 'Робототехника негіздері',
-      description: 'Arduino және Raspberry Pi қолданып, алғашқы роботтарыңызды жасаңыз',
-      duration: '8 апта',
-      students: '150+',
-      level: 'Бастаушы',
-      price: '₸45,000',
-      features: ['Arduino программалау', 'Сенсорлармен жұмыс', '3D модельдеу', 'Жоба жасау']
-    },
-    {
       id: 2,
       title: 'Lego spike Prime',
       description: 'lego spike prime роботтарын құрастыру және программалау жарыстарға дайындау',
       duration: '2 апта',
       students: '20+',
-      level: 'Орташа',
-      price: '₸75,000',
+      level: 'Бастаушы',
+      price: '15,000 - 55,000₸',
       features: ['Робот құрастыру', 'Программалау негіздері', 'Жарыстарға дайындық', 'Командалық жұмыс']
+    },
+    {
+      id: 1,
+      title: 'Робототехника негіздері',
+      description: 'Arduino және Raspberry Pi қолданып, алғашқы роботтарыңызды жасаңыз',
+      duration: '8 апта',
+      students: '150+',
+      level: 'Орташа',
+      price: '10,000 - 45,000₸',
+      features: ['Arduino программалау', 'Сенсорлармен жұмыс', '3D модельдеу', 'Жоба жасау']
     },
     {
       id: 3,
@@ -31,7 +31,7 @@ const Courses = () => {
       duration: '10 апта',
       students: '80+',
       level: 'Жоғары',
-      price: '₸95,000',
+      price: '5000 - 35,000₸',
       features: ['Дрон құрастыру', 'Автопилот', 'FPV жүйесі', 'Навигация']
     }
   ];

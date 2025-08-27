@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { ArrowRight, Cpu, Zap, BrainCircuit as Circuit, Volume2, VolumeX } from 'lucide-react';
+import { ArrowRight, Cpu, Zap, BrainCircuit as Circuit, Volume2, VolumeX } from "lucide-react";
 
 // --- YouTube Hero Player with left-bottom toggle ---
 declare global {
@@ -52,6 +52,15 @@ const YouTubeHeroPlayer = ({ videoId }: { videoId: string }) => {
     } else {
       window.onYouTubeIframeAPIReady = onAPIReady;
     }
+
+    // Cleanup (компонент жойылғанда плеерді да жою)
+    return () => {
+      try {
+        playerRef.current?.destroy?.();
+      } catch {
+        // no-op
+      }
+    };
   }, [videoId]);
 
   const toggleMute = () => {
@@ -100,6 +109,18 @@ const YouTubeHeroPlayer = ({ videoId }: { videoId: string }) => {
 
 // --- Full Hero section ---
 const Hero = () => {
+  // “Курстарды қарау” батырмасына жұмсақ скролл логикасы
+  const scrollToCourses = () => {
+    const el = document.getElementById("courses");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    } else {
+      // Егер секция әзірше жоқ болса, басты бетке якорьмен көшуге болады (қажет болса)
+      // window.location.hash = "#courses";
+      console.warn('Секция id="courses" табылмады. Сіз курстар секциясына id="courses" қосқаныңызға көз жеткізіңіз.');
+    }
+  };
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
       {/* Animated Background Elements */}
@@ -111,9 +132,9 @@ const Hero = () => {
 
       {/* Floating Tech Elements */}
       <div className="absolute inset-0 pointer-events-none">
-        <Cpu className="absolute top-1/4 left-20 h-8 w-8 text-blue-400/30 float-animation" style={{ animationDelay: '0s' }} />
-        <Circuit className="absolute top-1/3 right-32 h-6 w-6 text-purple-400/30 float-animation" style={{ animationDelay: '1s' }} />
-        <Zap className="absolute bottom-1/3 left-1/3 h-10 w-10 text-green-400/30 float-animation" style={{ animationDelay: '2s' }} />
+        <Cpu className="absolute top-1/4 left-20 h-8 w-8 text-blue-400/30 float-animation" style={{ animationDelay: "0s" }} />
+        <Circuit className="absolute top-1/3 right-32 h-6 w-6 text-purple-400/30 float-animation" style={{ animationDelay: "1s" }} />
+        <Zap className="absolute bottom-1/3 left-1/3 h-10 w-10 text-green-400/30 float-animation" style={{ animationDelay: "2s" }} />
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
@@ -139,7 +160,11 @@ const Hero = () => {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
-            <button className="group relative px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg font-semibold text-white hover:from-blue-500 hover:to-purple-500 transition-all duration-300 transform hover:scale-105 neon-border">
+            <button
+              type="button"
+              onClick={scrollToCourses}
+              className="group relative px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg font-semibold text-white hover:from-blue-500 hover:to-purple-500 transition-all duration-300 transform hover:scale-105 neon-border"
+            >
               <span className="flex items-center space-x-2">
                 <span>Курстарды қарау</span>
                 <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />

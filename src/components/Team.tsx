@@ -1,4 +1,4 @@
-import {Award, Code, Cpu, type LucideIcon } from 'lucide-react';
+import { Award, Code, Cpu, Instagram, Phone } from "lucide-react";
 
 type TeamMember = {
   id: number;
@@ -9,50 +9,69 @@ type TeamMember = {
   description: string;
   skills: string[];
   achievements: string;
+  instagram?: string; // контакт: Instagram сілтеме
+  phone?: string;     // контакт: телефон (мыс: +7771xxxxxxx)
 };
 
 const teamMembers: TeamMember[] = [
   {
     id: 1,
-    name: 'Омар Нұрбек',
-    position: 'Техникалық директор',
-    specialization: 'Робототехника және AI',
-    image: 'https://raw.githubusercontent.com/NUrdfau009/foto/main/nurbek.png',
+    name: "Омар Нұрбек",
+    position: "Техникалық директор",
+    specialization: "Робототехника және AI",
+    image: "https://raw.githubusercontent.com/NUrdfau009/foto/main/nurbek.png",
     description:
-      'Робототехника саласында 15 жылдық тәжірибесі бар маман. KAzGU уриверситеті түлегі.',
-    skills: ['Python', 'ROS', 'TensorFlow', 'Arduino'],
-    achievements: '50+ жоба, 15+ сертификат',
+      "Робототехника саласында 15 жылдық тәжірибесі бар маман. KAzGU уриверситеті түлегі.",
+    skills: ["Python", "ROS", "TensorFlow", "Arduino"],
+    achievements: "50+ жоба, 15+ сертификат",
+    instagram: "https://instagram.com/nurbektech", // ← осында өз сілтемеңіз
+    phone: "+77477781004",                                   // ← осында өз номеріңіз
   },
   {
     id: 2,
-    name: 'Қайырбек Нұрдәулет',
-    position: 'AI мамандығы жетекшісі',
-    specialization: 'Машиналық оқыту және Computer Vision',
-    image: 'https://raw.githubusercontent.com/NUrdfau009/foto/main/nurik.jpg',
+    name: "Қайырбек Нұрдәулет",
+    position: "AI мамандығы жетекшісі",
+    specialization: "Машиналық оқыту және Computer Vision",
+    image: "https://raw.githubusercontent.com/NUrdfau009/foto/main/nurik.jpg",
     description:
-      'Жасанды интеллект саласындағы зерттеуші. ХДУ университеті 4 - курс студенті  .',
-    skills: ['Python', 'Deep Learning', 'Neural Networks'],
-    achievements: '30+ ғылыми мақала, 10+ патент',
+      "Жасанды интеллект саласындағы зерттеуші. ХДУ университеті 4 - курс студенті  .",
+    skills: ["Python", "Deep Learning", "Neural Networks"],
+    achievements: "30+ ғылыми мақала, 10+ патент",
+    instagram: "https://instagram.com/nurdaulet__kaiyrbek",
+    phone: "+77715804134",
   },
   {
     id: 3,
-    name: 'Мәжіт Сәуірбай',
-    position: 'Дрон технологиялары маманы',
-    specialization: 'Автономды жүйелер және IoT',
-    image: 'https://raw.githubusercontent.com/NUrdfau009/foto/main/sauir.jpg',
+    name: "Мәжіт Сәуірбай",
+    position: "Дрон технологиялары маманы",
+    specialization: "Автономды жүйелер және IoT",
+    image: "https://raw.githubusercontent.com/NUrdfau009/foto/main/sauir.jpg",
     description:
-      'Дрон технологиялары мен IoT жүйелері бойынша сарапшы. 3 жылдық  тәжірибе.',
-    skills: ['C++', 'ArduPilot', 'IoT', 'Embedded Systems'],
-    achievements: '25+ дрон жобасы, 5+ стартап',
+      "Дрон технологиялары мен IoT жүйелері бойынша сарапшы. 3 жылдық  тәжірибе.",
+    skills: ["C++", "ArduPilot", "IoT", "Embedded Systems"],
+    achievements: "25+ дрон жобасы, 5+ стартап",
+    instagram: "https://instagram.com/ssrbuu_",
+    phone: "+77075100904",
   },
 ];
 
-const getSpecializationIcon = (specialization: string): LucideIcon => {
+const getSpecializationIcon = (specialization: string) => {
   const s = specialization.toLowerCase();
-  if (s.includes('ai') || s.includes('machine') || s.includes('машиналық') || s.includes('vision') || s.includes('интеллект')) {
+  if (
+    s.includes("ai") ||
+    s.includes("machine") ||
+    s.includes("машиналық") ||
+    s.includes("vision") ||
+    s.includes("интеллект")
+  ) {
     return Code;
   }
-  if (s.includes('дрон') || s.includes('drone') || s.includes('iot') || s.includes('автономды')) {
+  if (
+    s.includes("дрон") ||
+    s.includes("drone") ||
+    s.includes("iot") ||
+    s.includes("автономды")
+  ) {
     return Cpu;
   }
   return Award;
@@ -76,14 +95,13 @@ const Team = () => {
 
         {/* Team Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {teamMembers.map((member, index) => {
+          {teamMembers.map((member) => {
             const SpecIcon = getSpecializationIcon(member.specialization);
 
             return (
               <div
                 key={member.id}
                 className="group relative bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm rounded-2xl border border-purple-500/20 p-6 hover:border-purple-400/50 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20"
-                style={{ animationDelay: `${index * 0.2}s` }}
               >
                 {/* Member Photo (gradient ring) */}
                 <div className="relative mb-6">
@@ -142,7 +160,33 @@ const Team = () => {
                   </div>
                 </div>
 
-              
+                {/* Contacts (Instagram & Phone) */}
+                <div className="flex justify-center gap-4 mt-4">
+                  {member.instagram && (
+                    <a
+                      href={member.instagram}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 px-3 py-2 text-pink-300 border border-pink-400/40 rounded-lg hover:bg-pink-500/10 transition"
+                      aria-label={`${member.name} — Instagram`}
+                      title="Instagram"
+                    >
+                      <Instagram className="h-4 w-4" />
+                      <span>Instagram</span>
+                    </a>
+                  )}
+                  {member.phone && (
+                    <a
+                      href={`tel:${member.phone.replace(/\s+/g, "")}`}
+                      className="flex items-center gap-2 px-3 py-2 text-blue-300 border border-blue-400/40 rounded-lg hover:bg-blue-500/10 transition"
+                      aria-label={`${member.name} — Телефон`}
+                      title="Телефон"
+                    >
+                      <Phone className="h-4 w-4" />
+                      <span>{member.phone}</span>
+                    </a>
+                  )}
+                </div>
 
                 {/* Hover Glow Effect */}
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-500/5 to-pink-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
